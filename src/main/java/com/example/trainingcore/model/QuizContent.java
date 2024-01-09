@@ -9,7 +9,7 @@ import java.util.List;
 @Document("quiz_contents")
 @Getter
 @Setter
-public class QuizContent {
+public class QuizContent extends Content {
 
     private List<QuizQuestion> questions;
 
