@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.UUID;
 
 @Document("modules")
@@ -17,7 +18,7 @@ public class Module {
 
     private String name;
     private Content content;
-    private Module submodule;
+    private List<Module> submodules;
     private Course course;
 
 }
