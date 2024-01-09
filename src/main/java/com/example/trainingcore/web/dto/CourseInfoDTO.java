@@ -18,12 +18,12 @@ public class CourseInfoDTO {
     @JsonProperty(
             access = JsonProperty.Access.READ_ONLY
     )
-    private StudentDTO studentDTO;
+    private StudentDTO user;
 
     @JsonProperty(
             access = JsonProperty.Access.READ_ONLY
     )
-    private CourseDTO courseDTO;
+    private CourseDTO course;
 
     @JsonProperty(
             access = JsonProperty.Access.READ_ONLY
