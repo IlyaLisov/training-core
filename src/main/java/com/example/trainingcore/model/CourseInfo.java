@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
-@Document("coursesInfo")
+@Document("courses_info")
 @Getter
 @Setter
 public class CourseInfo {
