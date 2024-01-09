@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("text_contents")
 @Getter
 @Setter
-public class TextContent {
+public class TextContent extends Content {
 
     private String text;
 

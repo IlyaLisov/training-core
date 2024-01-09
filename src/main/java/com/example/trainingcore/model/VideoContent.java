@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("video_contents")
 @Getter
 @Setter
-public class VideoContent {
+public class VideoContent extends Content {
 
     private String videoURL;
 
