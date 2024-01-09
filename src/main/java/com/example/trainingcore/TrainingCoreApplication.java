@@ -8,7 +8,9 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories
 public class TrainingCoreApplication {
 
-    public static void main(String[] args) {
+    public static void main(
+            final String[] args
+    ) {
         SpringApplication.run(TrainingCoreApplication.class, args);
     }
 
