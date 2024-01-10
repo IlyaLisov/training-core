@@ -1,9 +1,9 @@
 package com.example.trainingcore.repository;
 
 import com.example.trainingcore.model.Progress;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.UUID;
-
-public interface ProgressRepository extends MongoRepository<Progress, UUID> {
+public interface ProgressRepository
+        extends MongoRepository<Progress, ObjectId> {
 }

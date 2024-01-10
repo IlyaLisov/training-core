@@ -7,8 +7,7 @@ import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.UUID;
+import org.bson.types.ObjectId;
 
 @Getter
 @Setter
@@ -22,7 +21,7 @@ public abstract class UserDTO {
             message = "Id must be null.",
             groups = OnCreate.class
     )
-    protected UUID id;
+    protected ObjectId id;
 
     @NotNull(
             message = "Full name must be not null."

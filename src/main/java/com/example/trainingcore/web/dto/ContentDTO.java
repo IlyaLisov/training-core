@@ -4,8 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.UUID;
+import org.bson.types.ObjectId;
 
 @Getter
 @Setter
@@ -19,6 +18,6 @@ public abstract class ContentDTO {
             message = "Id must be null.",
             groups = OnCreate.class
     )
-    protected UUID id;
+    protected ObjectId id;
 
 }
