@@ -33,7 +33,6 @@ public interface ContentMapper {
         }
     }
 
-
     default ContentDTO toDto(
             final Content e
     ) {

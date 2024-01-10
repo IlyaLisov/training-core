@@ -2,10 +2,9 @@ package com.example.trainingcore.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.UUID;
 
 @Document("courses_info")
 @Getter
@@ -13,7 +12,7 @@ import java.util.UUID;
 public class CourseInfo {
 
     @Id
-    private UUID id;
+    private ObjectId id;
 
     private Student user;
     private Course course;

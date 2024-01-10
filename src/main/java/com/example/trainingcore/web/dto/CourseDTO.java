@@ -5,9 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,7 +21,7 @@ public class CourseDTO {
             message = "Id must be null.",
             groups = OnCreate.class
     )
-    private UUID id;
+    private ObjectId id;
 
     @NotNull(
             message = "Name must be not null."

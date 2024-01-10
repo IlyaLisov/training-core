@@ -8,9 +8,9 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -24,7 +24,7 @@ public class QuizQuestionDTO {
             message = "Id must be null.",
             groups = OnCreate.class
     )
-    private UUID id;
+    private ObjectId id;
 
     @NotNull(
             message = "Title must be not null."

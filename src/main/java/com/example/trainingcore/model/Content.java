@@ -2,15 +2,14 @@ package com.example.trainingcore.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-
-import java.util.UUID;
 
 @Getter
 @Setter
 public abstract class Content {
 
     @Id
-    protected UUID id;
+    protected ObjectId id;
 
 }
