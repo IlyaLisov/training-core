@@ -19,7 +19,6 @@ import java.util.Map;
 public class TokenParameters {
 
     private Map<String, Object> fields;
-    private TokenType type;
     private String subject;
     private Date issuedAt;
     private Date expiredAt;
@@ -59,7 +58,7 @@ public class TokenParameters {
         public TokenParametersBuilder type(
                 final TokenType type
         ) {
-            this.type = type;
+            this.fields.put("type", type);
             return this;
         }
 
@@ -87,7 +86,6 @@ public class TokenParameters {
         public TokenParameters build() {
             return new TokenParameters(
                     fields,
-                    type,
                     subject,
                     issuedAt,
                     expiredAt
