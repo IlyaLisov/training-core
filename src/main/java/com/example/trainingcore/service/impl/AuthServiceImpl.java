@@ -3,7 +3,9 @@ package com.example.trainingcore.service.impl;
 import com.example.trainingcore.model.User;
 import com.example.trainingcore.model.exception.ResourceAlreadyExistsException;
 import com.example.trainingcore.service.AuthService;
+import com.example.trainingcore.service.MailService;
 import com.example.trainingcore.service.UserService;
+import com.example.trainingcore.service.data.MailData;
 import com.example.trainingcore.web.security.jwt.AuthRequest;
 import com.example.trainingcore.web.security.jwt.AuthResponse;
 import com.example.trainingcore.web.security.jwt.RestoreRequest;
@@ -28,6 +30,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserService userService;
     private final JwtService jwtService;
+    private final MailService mailService;
     private final JwtProperties jwtProperties;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -39,6 +42,7 @@ public class AuthServiceImpl implements AuthService {
         if (userService.existsByUsername(user.getUsername())) {
             throw new ResourceAlreadyExistsException();
         }
+        user.setActive(false);
         user.setPassword(
                 passwordEncoder.encode(user.getPassword())
         );
@@ -50,7 +54,17 @@ public class AuthServiceImpl implements AuthService {
                         )
                         .build()
         );
-        //TODO send email with activation token
+        mailService.send(
+                MailData.builder(
+                                user.getUsername(),
+                                MailData.Type.ACTIVATION
+                        )
+                        .param(
+                                "token",
+                                token
+                        )
+                        .build()
+        );
     }
 
     @Override
@@ -88,6 +102,18 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    public void activate(
+            final String token
+    ) {
+        Map<String, Object> fields = jwtService.fields(token);
+        User user = userService.getByUsername(
+                (String) fields.get("sub")
+        );
+        user.setActive(true);
+        userService.update(user);
+    }
+
+    @Override
     public void restore(
             final String username
     ) {
@@ -100,7 +126,17 @@ public class AuthServiceImpl implements AuthService {
                             .type(TokenType.RESTORE)
                             .build()
             );
-            //TODO send email with token
+            mailService.send(
+                    MailData.builder(
+                                    username,
+                                    MailData.Type.RESTORE
+                            )
+                            .param(
+                                    "token",
+                                    token
+                            )
+                            .build()
+            );
         }
     }
 
@@ -113,7 +149,7 @@ public class AuthServiceImpl implements AuthService {
         }
         Map<String, Object> fields = jwtService.fields(request.getToken());
         User user = userService.getByUsername(
-                (String) fields.get("subject")
+                (String) fields.get("sub")
         );
         user.setPassword(
                 passwordEncoder.encode(request.getPassword())

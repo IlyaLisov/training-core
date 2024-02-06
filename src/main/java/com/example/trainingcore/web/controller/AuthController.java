@@ -52,6 +52,13 @@ public class AuthController {
         return authService.login(request);
     }
 
+    @PostMapping("/login")
+    public void activate(
+            @RequestBody @Validated final String token
+    ) {
+        authService.activate(token);
+    }
+
     @PostMapping("/restore")
     public void restore(
             @RequestBody final String username
