@@ -1,6 +1,6 @@
 package com.example.trainingcore.web.security.jwt;
 
-import com.example.trainingcore.web.security.jwt.service.JwtService;
+import io.github.ilyalisov.jwt.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -14,12 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.GenericFilterBean;
 
-import java.util.Map;
-
 @RequiredArgsConstructor
 public class JwtTokenFilter extends GenericFilterBean {
 
-    private final JwtService tokenService;
+    private final TokenService jwtService;
     private final UserDetailsService userDetailsService;
 
     @Override
@@ -30,7 +28,9 @@ public class JwtTokenFilter extends GenericFilterBean {
             final FilterChain filterChain
     ) {
         String token = resolve((HttpServletRequest) req);
-        if (tokenService.isValid(token, TokenType.ACCESS)) {
+        if (!token.isEmpty()
+                && jwtService.getType(token).equals(TokenType.ACCESS.name())
+                && !jwtService.isExpired(token)) {
             Authentication auth = getAuthentication(token);
             if (auth != null) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
@@ -52,9 +52,9 @@ public class JwtTokenFilter extends GenericFilterBean {
     private Authentication getAuthentication(
             final String token
     ) {
-        Map<String, Object> fields = tokenService.fields(token);
+        String subject = jwtService.getSubject(token);
         UserDetails userDetails = userDetailsService
-                .loadUserByUsername((String) fields.get("sub"));
+                .loadUserByUsername(subject);
         if (userDetails != null) {
             return new UsernamePasswordAuthenticationToken(
                     userDetails,

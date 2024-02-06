@@ -52,7 +52,7 @@ public class AuthController {
         return authService.login(request);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/activate")
     public void activate(
             @RequestBody @Validated final String token
     ) {

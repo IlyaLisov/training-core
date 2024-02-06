@@ -1,7 +1,7 @@
 package com.example.trainingcore.web.security;
 
 import com.example.trainingcore.web.security.jwt.JwtTokenFilter;
-import com.example.trainingcore.web.security.jwt.service.JwtService;
+import io.github.ilyalisov.jwt.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtService jwtService;
+    private final TokenService jwtService;
     private final UserDetailsService userDetailsService;
 
     @Bean
