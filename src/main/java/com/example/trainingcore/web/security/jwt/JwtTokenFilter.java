@@ -54,7 +54,7 @@ public class JwtTokenFilter extends GenericFilterBean {
     ) {
         Map<String, Object> fields = tokenService.fields(token);
         UserDetails userDetails = userDetailsService
-                .loadUserByUsername((String) fields.get("subject"));
+                .loadUserByUsername((String) fields.get("sub"));
         if (userDetails != null) {
             return new UsernamePasswordAuthenticationToken(
                     userDetails,

@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll(
             final Pageable page
     ) {
-        //TODO implement
-        return null;
+        return userRepository.findAll(page)
+                .getContent();
     }
 
     @Override
@@ -55,8 +55,12 @@ public class UserServiceImpl implements UserService {
     public User update(
             final User entity
     ) {
-        //TODO implement
-        return null;
+        User user = getById(entity.getId());
+        user.setUsername(entity.getUsername());
+        user.setFullName(entity.getFullName());
+        user.setActive(entity.isActive());
+        user.setPassword(entity.getPassword());
+        return userRepository.save(user);
     }
 
     @Override

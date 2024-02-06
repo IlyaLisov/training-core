@@ -16,6 +16,7 @@ public class SecurityUser implements UserDetails {
     private final ObjectId id;
     private final String username;
     private final String password;
+    private final boolean active;
     private final Collection<SimpleGrantedAuthority> authorities;
 
     public SecurityUser(
@@ -24,7 +25,8 @@ public class SecurityUser implements UserDetails {
         this(
                 user.getId(),
                 user.getUsername(),
-                user.getPassword()
+                user.getPassword(),
+                user.isActive()
         );
         this.authorities.add(
                 mapToGrantedAuthorities(user.getRole())
@@ -40,35 +42,37 @@ public class SecurityUser implements UserDetails {
     private SecurityUser(
             final ObjectId id,
             final String username,
-            final String password
+            final String password,
+            final boolean active
     ) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.active = active;
         this.authorities = new ArrayList<>();
     }
 
     @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return this.active;
     }
 
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.active;
     }
 
     @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return this.active;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.active;
     }
 
 }

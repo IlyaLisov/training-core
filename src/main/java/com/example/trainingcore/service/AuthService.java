@@ -11,6 +11,8 @@ public interface AuthService {
 
     AuthResponse login(AuthRequest request);
 
+    void activate(String token);
+
     void restore(String username);
 
     void reset(RestoreRequest request);
