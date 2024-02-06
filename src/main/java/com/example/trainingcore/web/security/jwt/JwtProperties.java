@@ -1,4 +1,4 @@
-package com.example.trainingcore.web.security.jwt.service.params;
+package com.example.trainingcore.web.security.jwt;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
