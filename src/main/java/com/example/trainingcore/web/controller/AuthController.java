@@ -52,6 +52,13 @@ public class AuthController {
         return authService.login(request);
     }
 
+    @PostMapping("/refresh")
+    public AuthResponse refresh(
+            @RequestBody @Validated final String token
+    ) {
+        return authService.refresh(token);
+    }
+
     @PostMapping("/activate")
     public void activate(
             @RequestBody @Validated final String token
