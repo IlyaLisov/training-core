@@ -7,7 +7,7 @@ import com.example.trainingcore.service.AuthService;
 import com.example.trainingcore.service.MailService;
 import com.example.trainingcore.service.UserService;
 import com.example.trainingcore.service.data.MailData;
-import com.example.trainingcore.web.security.jwt.AuthRequest;
+import com.example.trainingcore.web.security.AuthRequest;
 import com.example.trainingcore.web.security.jwt.AuthResponse;
 import com.example.trainingcore.web.security.jwt.JwtProperties;
 import com.example.trainingcore.web.security.jwt.RestoreRequest;
