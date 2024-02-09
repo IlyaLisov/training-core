@@ -2,6 +2,7 @@ package com.example.trainingcore.web.controller;
 
 import com.example.trainingcore.model.exception.ResourceAlreadyExistsException;
 import com.example.trainingcore.model.exception.ResourceNotFoundException;
+import com.example.trainingcore.model.exception.UserNotActiveException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,7 +26,7 @@ public class ControllerAdvice {
         return "Authentication failed.";
     }
 
-    @ExceptionHandler(LockedException.class)
+    @ExceptionHandler({LockedException.class, UserNotActiveException.class})
     public String locked() {
         return "Account is not activated.";
     }
