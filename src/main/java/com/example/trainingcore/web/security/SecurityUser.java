@@ -28,7 +28,7 @@ public class SecurityUser implements UserDetails {
                 user.isActive()
         );
         this.authorities.add(
-                mapToGrantedAuthorities(user.getRole())
+                mapToGrantedAuthorities(user.getRole().name())
         );
     }
 
