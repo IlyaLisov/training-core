@@ -13,7 +13,7 @@ public class Tutor extends User {
     private List<Course> courses;
 
     public Tutor() {
-        this.role = "ROLE_TUTOR";
+        this.role = Role.ROLE_TUTOR;
         this.courses = new ArrayList<>();
     }
 
