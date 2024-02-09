@@ -1,4 +1,4 @@
-package com.example.trainingcore.web.security.jwt;
+package com.example.trainingcore.web.security;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

@@ -1,7 +1,7 @@
 package com.example.trainingcore.service;
 
 import com.example.trainingcore.model.User;
-import com.example.trainingcore.web.security.jwt.AuthRequest;
+import com.example.trainingcore.web.security.AuthRequest;
 import com.example.trainingcore.web.security.jwt.AuthResponse;
 import com.example.trainingcore.web.security.jwt.RestoreRequest;
 
