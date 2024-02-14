@@ -5,4 +5,9 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CourseRepository extends MongoRepository<Course, ObjectId> {
+
+    boolean existsByIdAndTutorId(ObjectId id, ObjectId tutorId);
+
+    boolean existsByIdAndStudentsIdContains(ObjectId id, ObjectId studentId);
+
 }

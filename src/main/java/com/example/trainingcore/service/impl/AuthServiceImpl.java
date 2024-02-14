@@ -2,11 +2,12 @@ package com.example.trainingcore.service.impl;
 
 import com.example.trainingcore.model.User;
 import com.example.trainingcore.model.exception.ResourceAlreadyExistsException;
+import com.example.trainingcore.model.exception.UserNotActiveException;
 import com.example.trainingcore.service.AuthService;
 import com.example.trainingcore.service.MailService;
 import com.example.trainingcore.service.UserService;
 import com.example.trainingcore.service.data.MailData;
-import com.example.trainingcore.web.security.jwt.AuthRequest;
+import com.example.trainingcore.web.security.AuthRequest;
 import com.example.trainingcore.web.security.jwt.AuthResponse;
 import com.example.trainingcore.web.security.jwt.JwtProperties;
 import com.example.trainingcore.web.security.jwt.RestoreRequest;
@@ -76,11 +77,29 @@ public class AuthServiceImpl implements AuthService {
                         request.getPassword()
                 )
         );
+        return generateAuthResponse(request.getUsername());
+    }
+
+    @Override
+    public AuthResponse refresh(
+            final String token
+    ) {
+        String username = jwtService.getSubject(token);
+        User user = userService.getByUsername(username);
+        if (!user.isActive()) {
+            throw new UserNotActiveException();
+        }
+        return generateAuthResponse(username);
+    }
+
+    private AuthResponse generateAuthResponse(
+            final String username
+    ) {
         AuthResponse response = new AuthResponse();
         response.setAccess(
                 jwtService.create(
                         TokenParameters.builder(
-                                        request.getUsername(),
+                                        username,
                                         TokenType.ACCESS.name(),
                                         jwtProperties.getAccess()
                                 )
@@ -90,7 +109,7 @@ public class AuthServiceImpl implements AuthService {
         response.setRefresh(
                 jwtService.create(
                         TokenParameters.builder(
-                                        request.getUsername(),
+                                        username,
                                         TokenType.REFRESH.name(),
                                         jwtProperties.getRefresh()
                                 )

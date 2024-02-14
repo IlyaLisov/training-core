@@ -1,13 +1,15 @@
 package com.example.trainingcore.web.security.jwt;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
 @Component
-@Data
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "security.jwt")
 public class JwtProperties {
 

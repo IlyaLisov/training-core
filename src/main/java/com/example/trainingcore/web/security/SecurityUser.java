@@ -1,7 +1,6 @@
 package com.example.trainingcore.web.security;
 
 import com.example.trainingcore.model.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -29,7 +28,7 @@ public class SecurityUser implements UserDetails {
                 user.isActive()
         );
         this.authorities.add(
-                mapToGrantedAuthorities(user.getRole())
+                mapToGrantedAuthorities(user.getRole().name())
         );
     }
 
@@ -52,19 +51,16 @@ public class SecurityUser implements UserDetails {
         this.authorities = new ArrayList<>();
     }
 
-    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return this.active;
     }
 
-    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return this.active;
     }
 
-    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return this.active;

@@ -31,11 +31,6 @@ public class CourseDTO {
     @JsonProperty(
             access = JsonProperty.Access.READ_ONLY
     )
-    private TutorDTO tutor;
-
-    @JsonProperty(
-            access = JsonProperty.Access.READ_ONLY
-    )
     private List<ModuleDTO> modules;
 
 }

@@ -1,9 +1,9 @@
 package com.example.trainingcore.service.impl;
 
-import com.example.trainingcore.model.User;
+import com.example.trainingcore.model.Tutor;
 import com.example.trainingcore.model.exception.ResourceNotFoundException;
-import com.example.trainingcore.repository.UserRepository;
-import com.example.trainingcore.service.UserService;
+import com.example.trainingcore.repository.TutorRepository;
+import com.example.trainingcore.service.TutorService;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Pageable;
@@ -13,74 +13,74 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class TutorServiceImpl implements TutorService {
 
-    private final UserRepository userRepository;
+    private final TutorRepository tutorRepository;
 
     @Override
-    public User getById(
+    public Tutor getById(
             final ObjectId id
     ) {
-        return userRepository.findById(id)
+        return tutorRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
-    public User getByUsername(
+    public Tutor getByUsername(
             final String username
     ) {
-        return userRepository.findByUsername(username)
+        return tutorRepository.findByUsername(username)
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
-    public List<User> getAll(
+    public List<Tutor> getAll(
             final Pageable page
     ) {
-        return userRepository.findAll(page)
+        return tutorRepository.findAll(page)
                 .getContent();
     }
 
     @Override
-    public User create(
-            final User entity
+    public Tutor create(
+            final Tutor entity
     ) {
         if (entity.getId() == null && !existsByUsername(entity.getUsername())) {
-            userRepository.save(entity);
+            tutorRepository.save(entity);
         }
         return entity;
     }
 
     @Override
-    public User update(
-            final User entity
+    public Tutor update(
+            final Tutor entity
     ) {
-        User user = getById(entity.getId());
-        user.setUsername(entity.getUsername());
-        user.setFullName(entity.getFullName());
-        user.setActive(entity.isActive());
-        return userRepository.save(user);
+        Tutor tutor = getById(entity.getId());
+        tutor.setUsername(entity.getUsername());
+        tutor.setFullName(entity.getFullName());
+        tutor.setActive(entity.isActive());
+        return tutorRepository.save(tutor);
     }
 
     @Override
     public boolean existsById(
             final ObjectId id
     ) {
-        return userRepository.existsById(id);
+        return tutorRepository.existsById(id);
     }
 
     @Override
     public boolean existsByUsername(
             final String username
     ) {
-        return userRepository.existsByUsername(username);
+        return tutorRepository.existsByUsername(username);
     }
 
     @Override
     public void delete(
             final ObjectId id
     ) {
-        userRepository.deleteById(id);
+        tutorRepository.deleteById(id);
     }
 
 }
