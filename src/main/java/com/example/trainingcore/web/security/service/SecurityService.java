@@ -9,4 +9,8 @@ public interface SecurityService {
 
     boolean canAccessTutor(ObjectId tutorId);
 
+    boolean courseAuthor(ObjectId courseId);
+
+    boolean courseStudent(ObjectId courseId);
+
 }

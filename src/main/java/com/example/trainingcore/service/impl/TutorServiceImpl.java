@@ -59,7 +59,6 @@ public class TutorServiceImpl implements TutorService {
         tutor.setUsername(entity.getUsername());
         tutor.setFullName(entity.getFullName());
         tutor.setActive(entity.isActive());
-        tutor.setPassword(entity.getPassword());
         return tutorRepository.save(tutor);
     }
 
